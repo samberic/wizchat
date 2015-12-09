@@ -1,14 +1,15 @@
 package com.samatkinson;
 
 import com.samatkinson.config.HelloWorldConfiguration;
+import com.samatkinson.resources.ChatRoomResource;
 import com.samatkinson.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class HelloWorldApplication  extends Application<HelloWorldConfiguration> {
+public class WizChatApplication extends Application<HelloWorldConfiguration> {
     public static void main(String[] args) throws Exception {
-        new HelloWorldApplication().run(args);
+        new WizChatApplication().run(args);
     }
 
     @Override
@@ -24,8 +25,11 @@ public class HelloWorldApplication  extends Application<HelloWorldConfiguration>
     @Override
     public void run(HelloWorldConfiguration configuration,
                     Environment environment) {
-        final HelloWorldResource resource = new HelloWorldResource();
+        ChatRoomResource resource = new ChatRoomResource();
         environment.jersey().register(resource);
     }
 
+    public String url() {
+        return "http://localhost:8080";
+    }
 }

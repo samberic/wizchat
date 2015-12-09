@@ -3,19 +3,19 @@ package com.samatkinson.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
-public class Saying {
+public class Chat {
     private long id;
 
     @Length(max = 3)
-    private String content;
+    private String chat;
 
-    public Saying() {
+    public Chat() {
         // Jackson deserialization
     }
 
-    public Saying(long id, String content) {
+    public Chat(long id, String content) {
         this.id = id;
-        this.content = content;
+        this.chat = content;
     }
 
     @JsonProperty
@@ -24,7 +24,7 @@ public class Saying {
     }
 
     @JsonProperty
-    public String getContent() {
-        return content;
+    public String getChat() {
+        return chat;
     }
 }
