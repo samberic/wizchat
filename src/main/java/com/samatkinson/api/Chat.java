@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
 public class Chat {
-    private long id;
-
     @Length(max = 3)
     private String chat;
 
@@ -13,15 +11,10 @@ public class Chat {
         // Jackson deserialization
     }
 
-    public Chat(long id, String content) {
-        this.id = id;
+    public Chat(String content) {
         this.chat = content;
     }
 
-    @JsonProperty
-    public long getId() {
-        return id;
-    }
 
     @JsonProperty
     public String getChat() {
