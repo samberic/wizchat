@@ -56,7 +56,7 @@ public class End2EndChatTest {
         String message2 = "This is a chat between Mike and Dan";
 
         post(chatApplication.url() + "/chat/mike/dan")
-                .field("message", message)
+                .field("message", message2)
                 .asJson();
 
         HttpResponse<JsonNode> jsonResponseBobSue = get(chatApplication.url() + "/chat/bob/sue").asJson();
