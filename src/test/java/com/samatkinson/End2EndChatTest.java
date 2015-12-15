@@ -53,14 +53,14 @@ public class End2EndChatTest {
                 .field("message", message)
                 .asJson();
 
-        String message2 = "This is a chat between Mike and Dan";
+        String message2 = "This is a chat between Mike and Bob";
 
-        post(chatApplication.url() + "/chat/mike/dan")
+        post(chatApplication.url() + "/chat/mike/bob")
                 .field("message", message2)
                 .asJson();
 
         HttpResponse<JsonNode> jsonResponseBobSue = get(chatApplication.url() + "/chat/bob/sue").asJson();
-        HttpResponse<JsonNode> jsonResponseMikeDan = get(chatApplication.url() + "/chat/mike/dan").asJson();
+        HttpResponse<JsonNode> jsonResponseMikeDan = get(chatApplication.url() + "/chat/mike/bob").asJson();
 
         assertThat(extractChat(jsonResponseBobSue), is("bob: " + message));
         assertThat(extractChat(jsonResponseMikeDan), is("mike: " + message2));

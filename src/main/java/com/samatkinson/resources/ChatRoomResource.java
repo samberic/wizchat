@@ -17,7 +17,6 @@ public class ChatRoomResource {
 
     List<Chat> chats = new LinkedList<Chat>();
 
-
     @GET
     public Chat chatBetween(@PathParam("userOne") final Optional<String> userOne,
                             @PathParam("userTwo") final Optional<String> userTwo) {
@@ -35,7 +34,7 @@ public class ChatRoomResource {
             @PathParam("userTwo") Optional<String> to,
             @FormParam("message") Optional<String> message
     ) {
-        String formattedMessage = from.get() + ": " + message.get();
+        String formattedMessage = from.get() + ": " + message.get() +"\n";
         for (Chat chat : chats) {
             if (chat.isBetween(from.get(), to.get())) {
                 chat.addMessage(formattedMessage);

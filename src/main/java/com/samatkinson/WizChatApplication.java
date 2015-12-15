@@ -10,7 +10,7 @@ public class WizChatApplication extends Application<HelloWorldConfiguration> {
     private Environment environment;
 
     public static void main(String[] args) throws Exception {
-        new WizChatApplication().run(args);
+        new WizChatApplication().run("server");
     }
 
     @Override
