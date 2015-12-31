@@ -91,7 +91,7 @@ public class End2EndChatTest {
     }
 
     private String extractChat(HttpResponse<JsonNode> jsonResponse) {
-        return jsonResponse.getBody().getObject().getString("chat");
+        return jsonResponse.getBody().getObject().getString("chat").trim();
     }
 
 

@@ -1,5 +1,6 @@
 package com.samatkinson;
 
+import com.codahale.metrics.health.HealthCheckRegistry;
 import com.samatkinson.config.HelloWorldConfiguration;
 import com.samatkinson.resources.ChatRoomResource;
 import io.dropwizard.Application;
@@ -29,6 +30,8 @@ public class WizChatApplication extends Application<HelloWorldConfiguration> {
         this.environment = environment;
         ChatRoomResource resource = new ChatRoomResource();
         environment.jersey().register(resource);
+
+        environment.healthChecks().register("chatz", new MessageCanSendHealthCheck(url()));
     }
 
     public String url() {
