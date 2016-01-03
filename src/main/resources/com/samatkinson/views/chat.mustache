@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http:git //yegor256.github.io/tacit/tacit.min.css"/>
+</head>
+<body>
+<ul>
+    {{#chats}}<li>{{userOne}} : {{userTwo}} </li>{{/chats}}
+</ul>
+<hr>
+{{#currentChat}}
+    <br>{{chat}}
+{{/currentChat}}
+</body>
+</html>
