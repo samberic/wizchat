@@ -1,6 +1,7 @@
 package com.samatkinson.resources;
 
 import com.google.common.base.Optional;
+import com.samatkinson.data.Chats;
 import org.junit.Test;
 
 import static com.google.common.base.Optional.*;
@@ -19,7 +20,7 @@ public class ChatRoomResourceTest {
 
     @Test
     public void test() throws Exception {
-        ChatResource resource = new ChatResource();
+        ChatResource resource = new ChatResource(new Chats());
         resource.newMessage(
                 mike,
                 dan,

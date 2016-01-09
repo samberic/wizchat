@@ -46,4 +46,7 @@ public class Chat {
         return userOne.equals(userOneName) || userTwo.equals(userOneName);
     }
 
+    public String getOtherUser(String userOneName) {
+        return userOne.equals(userOneName) ? userTwo : userOne;
+    }
 }

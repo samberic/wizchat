@@ -1,6 +1,7 @@
 package com.samatkinson;
 
 import com.samatkinson.config.HelloWorldConfiguration;
+import com.samatkinson.data.Chats;
 import com.samatkinson.resources.ChatResource;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -31,7 +32,7 @@ public class WizChatApplication extends Application<HelloWorldConfiguration> {
     public void run(HelloWorldConfiguration configuration,
                     Environment environment) {
         this.environment = environment;
-        environment.jersey().register(new ChatResource());
+        environment.jersey().register(new ChatResource(new Chats()));
 
         environment.healthChecks().register("chatz", new MessageCanSendHealthCheck(url()));
     }
