@@ -1,7 +1,19 @@
 .top{
-    height: 30px;
+    height: 40px;
     background-color: black;
 }
 body{
     margin: 0px;
+}
+
+.container{
+    margin-top: 60px;
+}
+.three{
+    border-right:2px solid black;
+}
+.user{
+    color: white;
+    margin-left: 30px;
+    padding-top: 5px;
 }

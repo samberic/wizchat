@@ -5,26 +5,32 @@
     <link rel="stylesheet" href="/assets/css/main.css"/>
 </head>
 <body>
-<div class="top"></div>
+<div class="top">
+    <div class="user">Logged in as {{currentUser}}</div>
+</div>
 <div class="container">
-
-
-<h1>{{currentUser}}'s Chats</h1>
-<ul>
-    {{#chats}}<li><a href="/chat/{{userOne}}/{{userTwo}}">{{userTwo}}</a></li>{{/chats}}
-</ul>
-<hr>
-{{#currentChat}}
-<h1>Chat between {{currentUser}} and {{otherUser}}</h1>
-   {{#chat}}
-       {{.}}<br/>
-   {{/chat}}
-    <br>
+<row>
+    <div class = "three columns">
+        <h1>Chats</h1>
+        <ul>
+            {{#chats}}<li><a href="/chat/{{userOne}}/{{userTwo}}">{{userTwo}}</a></li>{{/chats}}
+        </ul>
+    </div>
+    <div class = "nine columns">
+        {{#currentChat}}
+            <h1>Chat between {{currentUser}} and {{otherUser}}</h1>
+            {{#chat}}
+                {{.}}<br/>
+            {{/chat}}
+            <br>
             <form method="post" action="/chat/{{currentUser}}/{{otherUser}}">
                 <textarea name="message"></textarea>
                 <br/><button>Submit</button>
             </form>
-{{/currentChat}}
+        {{/currentChat}}
+    </div>
+</row>
+
 </div>
 </body>
 </html>
