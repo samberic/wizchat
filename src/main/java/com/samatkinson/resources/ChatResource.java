@@ -29,7 +29,7 @@ public class ChatResource {
             @PathParam("userTwo") Optional<String> to,
             @FormParam("message") Optional<String> message
     ) {
-        String formattedMessage = from.get() + ": " + message.get() +"\n";
+        String formattedMessage = from.get() + ": " + message.get() +"";
         chats.addMessageToChat(from.get(), to.get(), formattedMessage);
         return chatBetween(from, to);
 

@@ -1,10 +1,10 @@
 package com.samatkinson.data;
 
-import com.google.common.base.Optional;
 import com.samatkinson.api.Chat;
 
-import javax.ws.rs.PathParam;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Chats {
@@ -15,7 +15,7 @@ public class Chats {
         return chats.stream()
                 .filter(chat -> chat.isBetween(userOneName, userTwoName))
                 .findFirst()
-                .orElse(new Chat("", userOneName, userTwoName));
+                .orElse(new Chat(new ArrayList<>(), userOneName, userTwoName));
     }
 
     public List<Chat> asList() {
@@ -30,6 +30,6 @@ public class Chats {
                 return;
             }
         }
-        chats.add(new Chat(formattedMessage, from, to));
+        chats.add(new Chat(new LinkedList<>(Arrays.asList(formattedMessage)), from, to));
     }
 }
