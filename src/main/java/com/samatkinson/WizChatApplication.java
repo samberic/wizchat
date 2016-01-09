@@ -1,11 +1,12 @@
 package com.samatkinson;
 
-import com.codahale.metrics.health.HealthCheckRegistry;
 import com.samatkinson.config.HelloWorldConfiguration;
-import com.samatkinson.resources.ChatRoomResource;
+import com.samatkinson.resources.ChatResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
 
 public class WizChatApplication extends Application<HelloWorldConfiguration> {
     private Environment environment;
@@ -21,6 +22,8 @@ public class WizChatApplication extends Application<HelloWorldConfiguration> {
 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+        bootstrap.addBundle(new ViewBundle());
+        bootstrap.addBundle(new AssetsBundle("/assets", "/assets"));
         // nothing to do yet
     }
 
@@ -28,8 +31,7 @@ public class WizChatApplication extends Application<HelloWorldConfiguration> {
     public void run(HelloWorldConfiguration configuration,
                     Environment environment) {
         this.environment = environment;
-        ChatRoomResource resource = new ChatRoomResource();
-        environment.jersey().register(resource);
+        environment.jersey().register(new ChatResource());
 
         environment.healthChecks().register("chatz", new MessageCanSendHealthCheck(url()));
     }

@@ -27,7 +27,10 @@ public class End2EndChatTest {
 
     @Test
     public void noChatTextForPeopleWhoHaventSpokenBefore() throws Exception {
-        HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/jason/sookie").asJson();
+        HttpResponse<JsonNode> jsonResponse =
+                get(chatApplication.url() + "/chat/jason/sookie")
+                        .header("accept", "application/json")
+                        .asJson();
 
         assertThat(extractChat(jsonResponse), is(""));
     }
@@ -35,13 +38,21 @@ public class End2EndChatTest {
     @Test
     public void chatReturnsMessagesThatHaveBeenSent() throws Exception {
         String message = "Hey Sookie";
+        String messageTwo = "Hey Jason";
         post(chatApplication.url() + "/chat/jason/sookie")
+                .header("accept", "application/json")
                 .field("message", message)
                 .asJson();
+        post(chatApplication.url() + "/chat/sookie/jason")
+                .header("accept", "application/json")
+                .field("message", messageTwo)
+                .asJson();
 
-        HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/jason/sookie").asJson();
+        HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/jason/sookie")
+                .header("accept", "application/json")
+                .asJson();
 
-        assertThat(extractChat(jsonResponse), is("jason: " + message));
+        assertThat(extractChat(jsonResponse), is("jason: " + message + "\n" + "sookie: " + messageTwo));
 
     }
 
@@ -50,17 +61,23 @@ public class End2EndChatTest {
     public void userWithMultipleChatsCanAccessAllChats() throws Exception {
         String message = "This a chat between bob and sue";
         post(chatApplication.url() + "/chat/bob/sue")
+                .header("accept", "application/json")
                 .field("message", message)
                 .asJson();
 
         String message2 = "This is a chat between Mike and Bob";
 
         post(chatApplication.url() + "/chat/mike/bob")
+                .header("accept", "application/json")
                 .field("message", message2)
                 .asJson();
 
-        HttpResponse<JsonNode> jsonResponseBobSue = get(chatApplication.url() + "/chat/bob/sue").asJson();
-        HttpResponse<JsonNode> jsonResponseMikeDan = get(chatApplication.url() + "/chat/mike/bob").asJson();
+        HttpResponse<JsonNode> jsonResponseBobSue = get(chatApplication.url() + "/chat/bob/sue")
+                .header("accept", "application/json").
+                        asJson();
+        HttpResponse<JsonNode> jsonResponseMikeDan = get(chatApplication.url() + "/chat/mike/bob")
+                .header("accept", "application/json")
+                .asJson();
 
         assertThat(extractChat(jsonResponseBobSue), is("bob: " + message));
         assertThat(extractChat(jsonResponseMikeDan), is("mike: " + message2));
@@ -68,17 +85,18 @@ public class End2EndChatTest {
     }
 
 
-
     @Test
     public void chatCanBeAccessedByBothUsers() throws Exception {
         String message = "Hey Sookie";
         post(chatApplication.url() + "/chat/jason/sookie")
-                .queryString("a", "b")
+                .header("accept", "application/json")
                 .field("message", message)
                 .asJson();
 
-        HttpResponse<JsonNode> jasonResponse = get(chatApplication.url() + "/chat/jason/sookie").asJson();
-        HttpResponse<JsonNode> sookieResponse = get(chatApplication.url() + "/chat/sookie/jason").asJson();
+        HttpResponse<JsonNode> jasonResponse = get(chatApplication.url() + "/chat/jason/sookie")
+                .header("accept", "application/json").asJson();
+        HttpResponse<JsonNode> sookieResponse = get(chatApplication.url() + "/chat/sookie/jason")
+                .header("accept", "application/json").asJson();
 
         assertThat(extractChat(jasonResponse), is(extractChat(sookieResponse)));
 
@@ -91,7 +109,7 @@ public class End2EndChatTest {
     }
 
     private String extractChat(HttpResponse<JsonNode> jsonResponse) {
-        return jsonResponse.getBody().getObject().getString("chat").trim();
+        return jsonResponse.getBody().getObject().getJSONObject("currentChat").getString("chat").trim();
     }
 
 

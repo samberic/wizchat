@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="http:git //yegor256.github.io/tacit/tacit.min.css"/>
+    <link rel="stylesheet" href="/assets/css/skeleton.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
 </head>
 <body>
+<div class="top"></div>
+<div class="container">
+
+
+<h1>Current Chats</h1>
 <ul>
     {{#chats}}<li>{{userOne}} : {{userTwo}} </li>{{/chats}}
 </ul>
 <hr>
 {{#currentChat}}
+<h1>Chat between {{userOne}} and {{userTwo}}</h1>
     <br>{{chat}}
+    <br>
+            <form method="post" action="/chat/{{userOne}}/{{userTwo}}">
+                <textarea name="message"></textarea>
+                <br/><button>Submit</button>
+            </form>
 {{/currentChat}}
+</div>
 </body>
 </html>

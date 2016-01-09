@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 public class Chat {
     private String chat;
     public String userOne;
+
     public String userTwo;
 
     public Chat() {
@@ -16,6 +17,14 @@ public class Chat {
         this.chat = content;
         this.userOne = userOne;
         this.userTwo = userTwo;
+    }
+
+    public String getUserOne() {
+        return userOne;
+    }
+
+    public String getUserTwo() {
+        return userTwo;
     }
 
 

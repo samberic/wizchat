@@ -30,10 +30,10 @@ public class ChatRoomResourceTest {
                 jan,
                 of(fredJonChat));
 
-        assertThat(resource.chatBetween(mike, dan).getChat().trim(), is("Mike: " + danMikeChat));
-        assertThat(resource.chatBetween(dan, mike).getChat().trim(), is("Mike: " + danMikeChat));
-        assertThat(resource.chatBetween(fred, jan).getChat().trim(), is("Fred: " + fredJonChat));
-        assertThat(resource.chatBetween(jan, fred).getChat().trim(), is("Fred: " + fredJonChat));
+        assertThat(resource.chatBetween(mike, dan).getCurrentChat().getChat().trim(), is("Mike: " + danMikeChat));
+        assertThat(resource.chatBetween(dan, mike).getCurrentChat().getChat().trim(), is("Mike: " + danMikeChat));
+        assertThat(resource.chatBetween(fred, jan).getCurrentChat().getChat().trim(), is("Fred: " + fredJonChat));
+        assertThat(resource.chatBetween(jan, fred).getCurrentChat().getChat().trim(), is("Fred: " + fredJonChat));
 
 
     }
