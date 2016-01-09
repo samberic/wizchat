@@ -8,7 +8,6 @@ import java.util.List;
 public class Chat {
     private List<String> chat;
     public String userOne;
-
     public String userTwo;
 
     public Chat() {
@@ -39,7 +38,12 @@ public class Chat {
         chat.add(s);
     }
 
-    public boolean isBetween(String s, String s1) {
-        return userOne.equals(s) && userTwo.equals(s1) || userOne.equals(s1) && userTwo.equals(s);
+    public boolean isBetween(String userOneName, String userTwoName) {
+        return containsUser(userOneName) && containsUser(userTwoName);
     }
+
+    public boolean containsUser(String userOneName) {
+        return userOne.equals(userOneName) || userTwo.equals(userOneName);
+    }
+
 }

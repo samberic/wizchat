@@ -7,12 +7,16 @@ import java.util.List;
 
 public class ChatroomView extends View {
 
+    private String userOneName;
     private Chat currentChat;
     private List<Chat> chats;
+    private String userTwoName;
 
 
-    public ChatroomView(Chat currentChat, List<Chat> chats) {
+    public ChatroomView(String userOneName, String userTwoName, Chat currentChat, List<Chat> chats) {
         super("chat.mustache");
+        this.userOneName = userOneName;
+        this.userTwoName = userTwoName;
         this.currentChat = currentChat;
         this.chats = chats;
     }
@@ -24,4 +28,13 @@ public class ChatroomView extends View {
     public Chat getCurrentChat() {
         return currentChat;
     }
+
+    public String getCurrentUser() {
+        return userOneName;
+    }
+
+    public String getOtherUser() {
+        return userTwoName;
+    }
+
 }

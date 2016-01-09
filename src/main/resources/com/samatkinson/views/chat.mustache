@@ -9,16 +9,18 @@
 <div class="container">
 
 
-<h1>Current Chats</h1>
+<h1>{{currentUser}}'s Chats</h1>
 <ul>
-    {{#chats}}<li>{{userOne}} : {{userTwo}} </li>{{/chats}}
+    {{#chats}}<li><a href="/chat/{{userOne}}/{{userTwo}}">{{userTwo}}</a></li>{{/chats}}
 </ul>
 <hr>
 {{#currentChat}}
-<h1>Chat between {{userOne}} and {{userTwo}}</h1>
-    <br>{{chat}}
+<h1>Chat between {{currentUser}} and {{otherUser}}</h1>
+   {{#chat}}
+       {{.}}<br/>
+   {{/chat}}
     <br>
-            <form method="post" action="/chat/{{userOne}}/{{userTwo}}">
+            <form method="post" action="/chat/{{currentUser}}/{{otherUser}}">
                 <textarea name="message"></textarea>
                 <br/><button>Submit</button>
             </form>

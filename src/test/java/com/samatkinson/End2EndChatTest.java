@@ -3,13 +3,13 @@ package com.samatkinson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static com.mashape.unirest.http.Unirest.get;
 import static com.mashape.unirest.http.Unirest.post;
@@ -108,6 +108,33 @@ public class End2EndChatTest {
                 .header("accept", "application/json").asJson();
 
         assertThat(extractChat(jasonResponse), is(extractChat(sookieResponse)));
+
+    }
+
+    @Test
+    public void usersDoNotGetCrossTalk() throws Exception {
+        String message = "Hey Dan";
+        post(chatApplication.url() + "/chat/Mike/Dan")
+                .header("accept", "application/json")
+                .field("message", message)
+                .asJson();
+
+
+        HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/Bob/Mike")
+                .header("accept", "application/json").asJson();
+
+        assertThat(extractChatList(jsonResponse), is(empty()));
+
+    }
+
+    private List<JSONObject> extractChatList(HttpResponse<JsonNode> jsonResponse) {
+        JSONArray jsonArray = jsonResponse.getBody().getObject().getJSONArray("chats");
+        List<JSONObject> result = new ArrayList<>();
+
+        for(int i = 0; i < jsonArray.length(); i++)
+            result.add(jsonArray.getJSONObject(i));
+
+        return result;
 
     }
 

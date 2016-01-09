@@ -20,7 +20,7 @@ public class ChatResource {
                             @PathParam("userTwo") final Optional<String> userTwo) {
         String userOneName = userOne.get();
         String userTwoName = userTwo.get();
-        return new ChatroomView(chats.chatBetween(userOneName, userTwoName), chats.asList());
+        return new ChatroomView(userOneName, userTwoName, chats.chatBetween(userOneName, userTwoName), chats.of(userOneName));
     }
 
     @POST
