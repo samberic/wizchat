@@ -1,12 +1,11 @@
 package com.samatkinson.resources;
 
-import com.google.common.base.Optional;
 import com.samatkinson.data.Chats;
 import com.samatkinson.views.ChatroomView;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.google.common.base.Optional.*;
+import static com.google.common.base.Optional.of;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 

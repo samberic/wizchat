@@ -1,4 +1,4 @@
-package com.samatkinson.resources;
+package com.samatkinson.views;
 
 import com.samatkinson.api.Chat;
 
@@ -15,10 +15,10 @@ public class ChatView {
         this.messages = c.getChat();
     }
 
+
     public String getUserTwo() {
         return userTwoName;
     }
-
     public List<String> getMessages() {
         return messages;
     }

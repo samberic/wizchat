@@ -1,11 +1,9 @@
 package com.samatkinson.views;
 
 import com.samatkinson.api.Chat;
-import com.samatkinson.resources.ChatView;
 import io.dropwizard.views.View;
 
 import java.util.List;
-import java.util.function.Function;
 
 public class ChatroomView extends View {
 

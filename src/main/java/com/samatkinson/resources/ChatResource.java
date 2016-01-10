@@ -3,6 +3,7 @@ package com.samatkinson.resources;
 
 import com.google.common.base.Optional;
 import com.samatkinson.data.Chats;
+import com.samatkinson.views.ChatView;
 import com.samatkinson.views.ChatroomView;
 
 import javax.ws.rs.*;
@@ -21,11 +22,11 @@ public class ChatResource {
 
     @GET
     public ChatroomView chatBetween(@PathParam("userOne") final Optional<String> userOne,
-                            @PathParam("userTwo") final Optional<String> userTwo) {
+                                    @PathParam("userTwo") final Optional<String> userTwo) {
         String userOneName = userOne.get();
         String userTwoName = userTwo.get();
         return new ChatroomView(userOneName, userTwoName, chats.chatBetween(userOneName, userTwoName),
-                chats.of(userOneName)
+                chats.belongingTo(userOneName)
                         .stream()
                         .map(c -> new ChatView(userOneName, c))
                         .collect(toList()));
@@ -37,7 +38,7 @@ public class ChatResource {
             @PathParam("userTwo") Optional<String> to,
             @FormParam("message") Optional<String> message
     ) {
-        String formattedMessage = from.get() + ": " + message.get() +"";
+        String formattedMessage = from.get() + ": " + message.get() + "";
         chats.addMessageToChat(from.get(), to.get(), formattedMessage);
         return chatBetween(from, to);
 
