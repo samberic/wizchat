@@ -7,22 +7,22 @@ import java.util.List;
 
 public class ChatroomView extends View {
 
-    private String userOneName;
-    private Chat currentChat;
-    private List<ChatView> chats;
-    private String userTwoName;
+    private final List<ChatView> allChatsForThisUser;
+    private final String currentUser;
+    private final Chat currentChat;
+    private final String otherUser;
 
 
-    public ChatroomView(String userOneName, String userTwoName, Chat currentChat, List<ChatView> chats) {
+    public ChatroomView(String currentUser, String otherUser, Chat currentChat, List<ChatView> allChatsForThisUser) {
         super("chat.mustache");
-        this.userOneName = userOneName;
-        this.userTwoName = userTwoName;
+        this.currentUser = currentUser;
+        this.otherUser = otherUser;
         this.currentChat = currentChat;
-        this.chats = chats;
+        this.allChatsForThisUser = allChatsForThisUser;
     }
 
     public List<ChatView> getChats(){
-        return chats;
+        return allChatsForThisUser;
     }
 
     public Chat getCurrentChat() {
@@ -30,12 +30,10 @@ public class ChatroomView extends View {
     }
 
     public String getCurrentUser() {
-        return userOneName;
+        return currentUser;
     }
 
     public String getOtherUser() {
-        return userTwoName;
+        return otherUser;
     }
-
-
 }
