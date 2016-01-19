@@ -1,5 +1,6 @@
 package com.samatkinson.resources;
 
+import com.codahale.metrics.MetricRegistry;
 import com.samatkinson.data.Chats;
 import com.samatkinson.views.ChatroomView;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class ChatResourceTest {
 
     @Test
     public void returnsAUsersChatsWithUserAsUserOne() throws Exception {
-        ChatResource chatResource = new ChatResource(chats);
+        ChatResource chatResource = new ChatResource(new MetricRegistry(), chats);
         ChatroomView chatroomView = chatResource.chatBetween(of("Ben"), of("Jon"));
 
         assertThat(chatroomView.getChats().size(), is(3));

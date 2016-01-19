@@ -1,5 +1,6 @@
 package com.samatkinson.resources;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
 import com.samatkinson.data.Chats;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class ChatRoomResourceTest {
 
     @Test
     public void test() throws Exception {
-        ChatResource resource = new ChatResource(new Chats());
+        ChatResource resource = new ChatResource(new MetricRegistry(), new Chats());
         resource.newMessage(
                 mike,
                 dan,

@@ -46,23 +46,19 @@ public class End2EndChatTest {
     public void chatReturnsMessagesThatHaveBeenSent() throws Exception {
         String message = "Hey Sookie";
         String messageTwo = "Hey Jason";
-        post(chatApplication.url() + "/chat/jason/sookie")
-                .header("accept", "application/json")
-                .field("message", message)
-                .asJson();
-        post(chatApplication.url() + "/chat/sookie/jason")
-                .header("accept", "application/json")
-                .field("message", messageTwo)
-                .asJson();
+        String userOne = "jason";
+        String userTwo = "sookie";
+        Utils.submitChat(message, userOne, userTwo, chatApplication.url());
+        Utils.submitChat(messageTwo, userTwo, userOne, chatApplication.url());
 
-        HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/jason/sookie")
+        HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/" + userOne + "/" + userTwo)
                 .header("accept", "application/json")
                 .asJson();
 
         List<String> result = extractChat(jsonResponse);
         assertThat(result.size(), is(2));
-        assertThat(result.get(0), is("jason: " + message));
-        assertThat(result.get(1), is("sookie: " + messageTwo));
+        assertThat(result.get(0), is(userOne + ": " + message));
+        assertThat(result.get(1), is(userTwo + ": " + messageTwo));
 
     }
 
@@ -70,17 +66,17 @@ public class End2EndChatTest {
     @Test
     public void userWithMultipleChatsCanAccessAllChats() throws Exception {
         String message = "This a chat between bob and sue";
-        post(chatApplication.url() + "/chat/bob/sue")
+        String userOne = "bob";
+        post(chatApplication.url() + "/chat/" + userOne + "/sue")
                 .header("accept", "application/json")
                 .field("message", message)
                 .asJson();
 
         String message2 = "This is a chat between Mike and Bob";
 
-        post(chatApplication.url() + "/chat/mike/bob")
-                .header("accept", "application/json")
-                .field("message", message2)
-                .asJson();
+        String userThree = "mike";
+        String userFour = "bob";
+        Utils.submitChat(message2, userThree, userFour, chatApplication.url());
 
         HttpResponse<JsonNode> jsonResponseBobSue = get(chatApplication.url() + "/chat/bob/sue")
                 .header("accept", "application/json").
@@ -97,10 +93,9 @@ public class End2EndChatTest {
     @Test
     public void chatCanBeAccessedByBothUsers() throws Exception {
         String message = "Hey Sookie";
-        post(chatApplication.url() + "/chat/jason/sookie")
-                .header("accept", "application/json")
-                .field("message", message)
-                .asJson();
+        String userOne = "jason";
+        String userTwo = "sookie";
+        Utils.submitChat(message, userOne, userTwo, chatApplication.url());
 
         HttpResponse<JsonNode> jasonResponse = get(chatApplication.url() + "/chat/jason/sookie")
                 .header("accept", "application/json").asJson();
@@ -114,10 +109,9 @@ public class End2EndChatTest {
     @Test
     public void usersDoNotGetCrossTalk() throws Exception {
         String message = "Hey Dan";
-        post(chatApplication.url() + "/chat/Mike/Dan")
-                .header("accept", "application/json")
-                .field("message", message)
-                .asJson();
+        String userOne = "Mike";
+        String userTwo = "Dan";
+        Utils.submitChat(message, userOne, userTwo, chatApplication.url());
 
 
         HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/Bob/Mike")
