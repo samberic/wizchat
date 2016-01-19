@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 import static com.mashape.unirest.http.Unirest.post;
 
-public class Utils {
+public class Utilities {
 
     private static final ChatBots chatBots = new ChatBots("Sam", "Mike", "Dan", "Jon", "Fabrice");
 

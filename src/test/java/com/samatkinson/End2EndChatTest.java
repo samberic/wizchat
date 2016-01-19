@@ -48,8 +48,8 @@ public class End2EndChatTest {
         String messageTwo = "Hey Jason";
         String userOne = "jason";
         String userTwo = "sookie";
-        Utils.submitChat(message, userOne, userTwo, chatApplication.url());
-        Utils.submitChat(messageTwo, userTwo, userOne, chatApplication.url());
+        Utilities.submitChat(message, userOne, userTwo, chatApplication.url());
+        Utilities.submitChat(messageTwo, userTwo, userOne, chatApplication.url());
 
         HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/" + userOne + "/" + userTwo)
                 .header("accept", "application/json")
@@ -76,7 +76,7 @@ public class End2EndChatTest {
 
         String userThree = "mike";
         String userFour = "bob";
-        Utils.submitChat(message2, userThree, userFour, chatApplication.url());
+        Utilities.submitChat(message2, userThree, userFour, chatApplication.url());
 
         HttpResponse<JsonNode> jsonResponseBobSue = get(chatApplication.url() + "/chat/bob/sue")
                 .header("accept", "application/json").
@@ -95,7 +95,7 @@ public class End2EndChatTest {
         String message = "Hey Sookie";
         String userOne = "jason";
         String userTwo = "sookie";
-        Utils.submitChat(message, userOne, userTwo, chatApplication.url());
+        Utilities.submitChat(message, userOne, userTwo, chatApplication.url());
 
         HttpResponse<JsonNode> jasonResponse = get(chatApplication.url() + "/chat/jason/sookie")
                 .header("accept", "application/json").asJson();
@@ -111,7 +111,7 @@ public class End2EndChatTest {
         String message = "Hey Dan";
         String userOne = "Mike";
         String userTwo = "Dan";
-        Utils.submitChat(message, userOne, userTwo, chatApplication.url());
+        Utilities.submitChat(message, userOne, userTwo, chatApplication.url());
 
 
         HttpResponse<JsonNode> jsonResponse = get(chatApplication.url() + "/chat/Bob/Mike")
