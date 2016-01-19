@@ -48,7 +48,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.samatkinson.Main</mainClass>
+                            <mainClass>com.samatkinson.WizChatApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
